@@ -5,7 +5,7 @@ Notes:
   instead it should set .searching on body and let `.searching #multi`
   and `.searching #multi` do a job.
 - `.focused` should be set on `body` so that editor can be styled
-  differently based on weather it's focused or not.
+  differently based on weather it's focused or not. LightTable/LightTable#1098
 - Search filed and search result in the same div make it impossible
   to have margin for search field but not for results.
 
@@ -250,20 +250,21 @@ body {
   padding: 0;
   position: relative;
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
 }
 
 */
 
+#multi .tabsets {
+  color: var(fg);
+}
 
 #multi .content {
   padding: 0;
-  top: 29px;
-  bottom: 0;
-  left: 0;
   right: 0;
+  top: 29px;
+  bottom: -29px;
 }
 
 
@@ -317,7 +318,10 @@ body {
 }
 
 
-#multi .tabset .list li {
+#multi .tabsets .tabset .list li,
+#multi .tabsets .tabset .list li:hover
+{
+  color: var(fg);
   position: relative;
   text-align: center;
 
@@ -340,11 +344,11 @@ body {
   box-shadow: inset 7px 10px 9px -10px black;
 }
 
-#multi .tabset .list li:window-inactive {
+#multi .tabsets .tabset .list li:window-inactive {
 
 }
 
-#multi .tabset .list li.active {
+#multi .tabsets .tabset .list li.active {
   z-index: 2;
   -webkit-flex: 2 1 auto;
   flex: 1.2 1 auto;
@@ -418,9 +422,8 @@ body {
   border-width: 1px 1px 0 0;
 }
 
-
 #right-bar {
-  box-shadow: 1px -1px 5px 0;
+  box-shadow: 1px 14px 5px 0;
 }
 
 #right-bar .content {
@@ -637,7 +640,6 @@ a:hover,
   z-index: 20;
   left: 0;
   right: 0;
-  padding: 3px 10px;
 }
 #statusbar .console-toggle {
   cursor:default;
@@ -675,7 +677,7 @@ a:hover,
 #find-bar
 {
   background: linear-gradient(to bottom, rgb(237, 237, 237), rgb(217, 217, 217));
-  border-top: 1px solid rgb(140, 140, 140);
+  /* border-top: 1px solid rgb(140, 140, 140); */
   padding: 0 5px;
 
   display: -webkit-flex;
@@ -687,8 +689,6 @@ a:hover,
 }
 
 #find-bar input {
-  width: initial;
-  height: initial;
   font-size: inherit;
 
   -webkit-flex: 2 1 auto;
