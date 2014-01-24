@@ -18,9 +18,13 @@ Notes:
 :root {
   var-bg: linear-gradient(to bottom, rgb(177, 177, 177), rgb(151, 151, 151));
   var-fg: rgb(60, 60, 60);
-  var-fg-shadow: rgba(255, 255, 255, 0.498039) 0px 1px 0px;
+  var-multi: inherit;
   var-border: rgb(184, 184, 184);
   var-shadow: black;
+
+  var-fg-shadow: rgba(255, 255, 255, 0.498039) 0px 1px 0px;
+
+
 
   var-placeholder-fg: rgb(134, 139, 146);
   var-bright-fg: rgb(60, 60, 60);
@@ -194,73 +198,84 @@ Notes:
 * Shared
 ***********************************************************/
 
-body {
+body
+{
   background: var(bg);
   background-attachment: fixed;
   color: var(fg);
   font-family: Lucida Grande, sans-serif;
 }
 
-
-
-/* Get rid of custom scrollbar styles
-::-webkit-input-placeholder { color: var(placeholder-fg); }
-::-webkit-scrollbar {background: transparent;}
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(dark-highlight-bg); border:1px solid var(dark-highlight-bg); }
-::-webkit-scrollbar-thumb:hover { background: var(medium-highlight-bg); border:1px solid var(medium-highlight-bg); }
-::-webkit-scrollbar-corner { background:transparent; }
-*/
-::selection { background: var(placeholder-fg); }
-
-.inline-result { background: var(dark-accent-background); color:var(accent-foreground); }
-
-.inline-exception pre { background: var(error-bg); color: var(error-fg); }
-
-.underline-result pre { background: transparent; color: var(accent-foreground)}
-
-.inspector-object h2:before { color:var(hidden-fg); }
-.inspector-object em { color:var(accent-foreground); }
-.inspector-object { color: var(fg); }
-
-.inline-result .inspector-object { color: var(light-accent-foreground); }
-.inline-result .inspector-object h2:before { color: var(light-accent-foreground); }
-
-/* tabs
-#multi-container { background: var(bg); }
-#multi { background:var(bg); }
-#multi .list { background:transparent; }
-#multi .list li { box-sizing:border-box; height:29px;}
-#multi .list .active, #multi .list li:hover { background:var(dark-highlight-bg); color:var(highlight-fg); }
-#multi .list .dirty { color:var(accent-foreground); }
-#multi .list .dirty:after { content: "*"; }
-#multi .list.dragging li { background:transparent !important; }
-#multi .dirty.ui-sortable-placeholder:after { content:"" !important; }
-#multi .tabset + .tabset { border-left:2px solid var(border); }
-
-
-#multi .tabset .list li {
-  background: var(bg);
-  border-radius: 0 0 5px 5px;
-  border: var(sidebar-border);
-  border-top: none;
+::selection
+{
+  background: var(placeholder-fg);
 }
 
-#multi .content {
-  padding: 0;
-  position: relative;
-  top: 0;
-  left: 0;
-  right: 0;
+
+/* inline results */
+.inline-result
+{
+  background: var(dark-accent-background);
+  color:var(accent-foreground);
 }
 
-*/
+.inline-exception pre
+{
+  background: var(error-bg);
+  color: var(error-fg);
+}
 
-#multi .tabsets {
+.underline-result pre
+{
+  background: transparent;
+  color: var(accent-foreground);
+}
+
+.inline-doc
+{
+  background:var(dark-accent-background);
+}
+.inline-doc h1
+{
+  color:var(light-accent-foreground);
+}
+.inline-doc h3, .inline-doc h2
+{
+  color:var(accent-foreground);
+}
+.underline-result .inline-doc pre
+{
+  color:var(accent-foreground);
+}
+
+
+
+.inspector-object h2:before
+{
+  color:var(hidden-fg);
+}
+.inspector-object em
+{
+  color:var(accent-foreground);
+}
+.inspector-object
+{
   color: var(fg);
 }
 
-#multi .content {
+.inline-result .inspector-object
+{
+  color: var(light-accent-foreground);
+}
+.inline-result .inspector-object h2:before
+{
+  color: var(light-accent-foreground);
+}
+
+/* tabs */
+
+#multi .content
+{
   padding: 0;
   right: 0;
   top: 29px;
@@ -268,11 +283,13 @@ body {
 }
 
 
-#multi .tabset + .tabset {
+#multi .tabset + .tabset
+{
   border-left: 1px solid var(pane-border);
 }
 
-#multi .list:hover {
+#multi .list:hover
+{
   overflow-x:inital;
   height:initial;
   z-index:initial;
