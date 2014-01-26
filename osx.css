@@ -11,12 +11,65 @@ Notes:
 
 **/
 
+/** reset **/
+
+*:focus {
+  outline: initial;
+}
+
+input {
+  border: inital;
+  outline: initial;
+  border-radius: initial;
+}
+
 /**********************************************************
 * Vars
 ***********************************************************/
 
-:root {
-  var-bg: linear-gradient(to bottom, rgb(177, 177, 177), rgb(151, 151, 151));
+:root .skin-osx {
+  var-active-chrome: linear-gradient(to bottom, rgb(177, 177, 177), rgb(151, 151, 151));
+  var-inactive-chorme: linear-gradient(to bottom, rgb(224, 224, 224), rgb(198, 198, 198));
+  var-chrome: var(active-chrome);
+
+  var-secondary-chrome: linear-gradient(to bottom, rgb(237, 237, 237), rgb(216, 216, 216));
+
+
+  /* OSX scope buttons:
+  https://developer.apple.com/library/mac/documentation/UserExperience/Conceptual/AppleHIGuidelines/Controls/Controls.html#//apple_ref/doc/uid/TP30000359-SW13
+  TODO: Make plugin manager just use .scope-button class.
+  */
+  var-scope-button-border: none;
+  var-scope-button-border-radius: 15px;
+  var-scope-button-bg: none;
+  var-scope-button-fg: black;
+  var-scope-button-box-shadow: inset -1px 1px 9px rgba(0, 0, 0, .2);
+  var-scope-button-font-weight: bold;
+
+  var-inactive-scope-button-box-shadow: none;
+
+  var-active-scope-button-bg: rgb(151, 151, 151);
+  var-active-scope-button-fg: white;
+
+  var-hovered-scope-button-bg: rgb(184, 184, 184);
+  var-hovered-scope-button-fg: white;
+
+  var-pressed-scope-button-bg: rgb(117, 117, 117);
+  var-pressed-scope-button-fg: rgb(240, 240, 240);
+
+
+  var-scope-bar-border-color: rgb(157, 157, 157);
+  var-scope-bar-border: 1px solid var(scope-bar-border-color);
+  var-scope-bar-bg: var(secondary-chrome);
+
+  var-find-bar-bg: var(secondary-chrome);
+  var-find-bar-border: var(scope-bar-border);
+
+  var-selected-entry-bg: linear-gradient(to bottom, rgb(153, 179, 207), rgb(110, 135, 181));
+  var-selected-entry-fg: white;
+  var-selected-entry-border-color: rgb(145, 175, 196);
+
+  var-bg: var(chrome);
   var-fg: rgb(60, 60, 60);
   var-multi: inherit;
   var-border: rgb(184, 184, 184);
@@ -63,7 +116,6 @@ Notes:
 
   var-overlay-dimmer: rgba(0,0,0,0.5);
 
-  var-tab-bg: linear-gradient(to bottom, rgb(177, 177, 177), rgb(151, 151, 151));
   var-tab-rounding: 0px 0px 6px 6px;
   var-tab-border: 1px solid rgb(105, 105, 105);
 
@@ -77,6 +129,25 @@ Notes:
   var-secondary-accent-dim-fg: #5EBDA5;
   var-secondary-accent-desat-fg: #9BC2B8;
 }
+
+:root .skin-osx.inactive {
+  var-bg: var(inactive-chorme);
+
+  var-selected-entry-bg: linear-gradient(to bottom, rgb(194, 194, 194), rgb(156, 156, 156));
+  var-selected-entry-border-color: rgb(168, 168, 168);
+}
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('./fonts/fontawesome-webfont.eot?v=4.0.3');
+  src: url('./fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'),
+       url('./fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'),
+       url('./fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'),
+       url('./fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 /**********************************************************
 * Default editor theme
@@ -279,7 +350,6 @@ body
   padding: 0;
   right: 0;
   top: 29px;
-  bottom: -29px;
 }
 
 
@@ -315,7 +385,6 @@ body
 #multi .tabset .list {
   margin: 0;
   padding: 0 12px 0 0;
-  background: var(bg);
   box-shadow: inset 7px 10px 9px -10px black;
   overflow-x: auto;
 }
@@ -348,7 +417,7 @@ body
   text-overflow: ellipsis;
 
   z-index: 1;
-  background: var(tab-bg);
+  background: var(bg);
 
   border-radius: 0px 0px 6px 6px;
   border: var(tab-border);
@@ -361,8 +430,10 @@ body
   box-shadow: inset 7px 10px 9px -10px black;
 }
 
-#multi .tabsets .tabset .list li:window-inactive {
-
+body.inactive  #multi .tabsets .tabset .list li,
+#multi .tabsets .tabset .list li:window-inactive
+{
+  background: var(inactive-chrome);
 }
 
 #multi .tabsets .tabset .list li.active {
@@ -505,13 +576,15 @@ input.option,
 #find-bar input
 {
   padding: 2px 0 2px 8px;
+  /*
   box-shadow: inset 0px 1px 3px -1px rgba(0, 0, 0, 0.7);
-  outline: none;
-  display: border-box;3
+  */
   border: 1px solid rgba(0, 0, 0, 0.22);
   border-radius: 15px;
+  /*
   background-clip: padding-box !important;
   background: white;
+  */
 }
 
 
@@ -657,6 +730,7 @@ a:hover,
   z-index: 20;
   left: 0;
   right: 0;
+  height: 20px;
 }
 #statusbar .console-toggle {
   cursor:default;
@@ -690,27 +764,30 @@ a:hover,
 #statusbar .log .error { color:var(error-fg); background:var(error-bg); }
 #statusbar .log .tip { color: var(accent-foreground); }
 
-/* Bottom search bar */
 #find-bar
 {
-  background: linear-gradient(to bottom, rgb(237, 237, 237), rgb(217, 217, 217));
-  /* border-top: 1px solid rgb(140, 140, 140); */
-  padding: 0 5px;
-
-  display: -webkit-flex;
-  -webkit-flex-direction: row;
+  background: var(find-bar-bg);
+  /*
+  border-top: var(find-bar-border);
+  padding: 3px 0;
+  */
 
   display: flex;
   flex-direction: row;
-  box-sizing: border-box;
+  align-items: center;
 }
 
 #find-bar input {
   font-size: inherit;
 
-  -webkit-flex: 2 1 auto;
   flex: 2 1 auto;
   margin-right: 8px;
+  max-height: 22px;
+
+  margin: 0 5px;
+  /*
+  outline: none;
+  */
 }
 
 .searcher button,
@@ -833,7 +910,6 @@ a:hover,
 
   -webkit-flex-direction: column;
   flex-direction: column;
-  box-sizing: border-box;
 }
 
 .search-results .searcher > * {
@@ -844,11 +920,11 @@ a:hover,
 .watch-result { display:inline-block; padding-left:2px; vertical-align:top; background:var(usage-bg); color:var(usage-fg); border-radius:2px; }
 .CodeMirror .watched { border-bottom:1px solid var(usage-fg); }
 
-.hintwrapper { padding:2px 0; padding-bottom:5px; padding-left:12px; box-sizing:border-box; }
-.jshinterrors  { display:inline-block; box-sizing:border-box; padding:2px 10px; border-radius:2px; background:var(error-bg); color:var(error-fg); }
+.hintwrapper { padding:2px 0; padding-bottom:5px; padding-left:12px; }
+.jshinterrors  { display:inline-block; padding:2px 10px; border-radius:2px; background:var(error-bg); color:var(error-fg); }
 .hintwrapper .spacer { display:inline-block; white-space:pre; }
 
-.behavior-helper-result {white-space:nowrap; display:inline-block; padding-top:0px; padding-bottom:0px; overflow:hidden; margin-left:0px; padding-left:20px; box-sizing:border-box; background:none; color:var(usage-fg); }
+.behavior-helper-result {white-space:nowrap; display:inline-block; padding-top:0px; padding-bottom:0px; overflow:hidden; margin-left:0px; padding-left:20px; background:none; color:var(usage-fg); }
 .behavior-helper-result div { white-space:nowrap; width:-webkit-fit-content; background:var(usage-bg); padding:0px 5px; border-radius:2px; margin-top:0px; }
 .behavior-helper-result div > * { border-radius:2px; padding:0px !important; }
 .behavior-helper-result h2 { display:block; width:-webkit-fit-content; white-space:nowrap; }
@@ -927,4 +1003,147 @@ OSX like search behavior
   -webkit-animation-name: text-editor-bouncy;
   -webkit-animation-duration: 550ms;
   -webkit-animation-timing-function: ease-in-out;
+}
+
+
+.plugin-manager {
+  background: var(pane-bg);
+  padding: 0;
+}
+
+.scope-bar,
+.plugin-manager .tabs
+{
+  display: flex;
+  -webkit-flex-direction:row;
+  -webkit-align-items:stretch;
+  width:100%;
+
+  border-bottom: var(scope-bar-border);
+  background: var(scope-bar-bg);
+  padding: 3px 5px;
+}
+
+.plugin-manager .version { margin-left:10px; }
+.plugin-manager h3:before { content:"by "; }
+.plugin-manager li
+{
+  border:none;
+  position:relative;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.plugin-manager li h1 { color:var(accent-foreground); }
+.plugin-manager li.has-update .version { color:var(error-fg); }
+.plugin-manager li.has-update .version { color:var(error-fg); }
+.plugin-manager li.has-update h1 { color:var(error-fg); }
+.plugin-manager li + li
+{
+  border-top:1px solid var(border);
+}
+.plugin-manager > ul > li:hover
+{
+}
+
+.plugin-manager input
+{
+  -webkit-flex:1;
+}
+
+button.scope-button:not(.active),
+.plugin-manager button:not(.active)
+{
+  box-shadow: var(inactive-scope-button-box-shadow);
+  color: var(scope-button-fg);
+}
+
+button.scope-button,
+.plugin-manager button
+{
+  border: var(scope-button-border);
+  border-radius: var(scope-button-border-radius);
+  box-shadow: var(scope-button-box-shadow);
+  font-weight: var(scope-button-font-weight);
+}
+
+.plugin-manager button.active {
+  background: var(active-scope-button-bg);
+  color: var(active-scope-button-fg);
+}
+
+.plugin-manager button:active,
+.plugin-manager button:not(.active):active {
+  background: var(pressed-scope-button-bg);
+  color: var(pressed-scope-button-fg);
+}
+
+.plugin-manager button:not(.active):hover {
+  background: var(hovered-scope-button-bg);
+  color: var(hovered-scope-button-fg);
+}
+
+
+.plugin-manager .source,
+.plugin-manager .install,
+.plugin-manager .uninstall,
+.plugin-manager .update,
+.plugin-manager .disable,
+.plugin-manager .enable
+{
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 18px;
+  margin: 5px;
+
+  cursor: pointer;
+  float: right;
+  color: rgb(150, 150, 150);
+}
+
+.plugin-manager li:hover .source,
+.plugin-manager li:hover .install,
+.plugin-manager li:hover .uninstall,
+.plugin-manager li:hover .update,
+.plugin-manager li:hover .disable,
+.plugin-manager li:hover .enable
+{
+  color: rgb(129, 129, 129);
+}
+
+.plugin-manager li .source:hover,
+.plugin-manager li .install:hover,
+.plugin-manager li .uninstall:hover,
+.plugin-manager li .update:hover,
+.plugin-manager li .disable:hover,
+.plugin-manager li .enable:hover
+{
+  color: rgb(18, 136, 239);
+  text-shadow: 0 0 1px;
+}
+
+.plugin-manager .source a {
+  display: none;
+}
+
+.plugin-manager .update:before,
+.plugin-manager .install:before {
+  content: "\f0ed";
+}
+.plugin-manager .source:before {
+  content: "\f121";
+}
+.plugin-manager .uninstall:before {
+  content: "\f014";
+}
+.plugin-manager .disable:before {
+  content: "\f026";
+}
+.plugin-manager .enable:before {
+  content: "\f028";
 }
