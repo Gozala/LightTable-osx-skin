@@ -382,6 +382,7 @@ body
 }
 
 #multi .tabset .list {
+  text-align: center;
   margin: 0;
   padding: 0 12px 0 0;
   padding: 0;
@@ -398,26 +399,57 @@ body
   margin: 0;
   padding: 0;
 
+  padding-top: 5px;
+
   display: flex;
   flex-direction: row;
 }
 
+#multi .tabsets .tabset .list li.sortable-dragging,
+#multi .tabsets .tabset .list li.active.sortable-dragging
+{
+  background: var(bg);
+  border-radius: 3px 3px 5px 5px;
+}
+
+#multi .tabsets .tabset .list li.sortable-placeholder
+{
+  height: 25px !important;
+  display: flex;
+  flex: 0.8;
+}
+
+#multi .tabsets .tabset .list li.sortable-placeholder:before
+{
+  border-left: 1px solid var(tab-border-color) !important;
+}
+
+#multi .tabsets .tabset .list li.sortable-dragging:before,
+#multi .tabsets .tabset .list li.sortable-dragging:after
+{
+  display: none;
+}
 
 #multi .tabsets .tabset .list li,
 #multi .tabsets .tabset .list li:hover
 {
   color: var(fg);
   position: relative;
-  text-align: center;
+  height: 25px;
 
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  align-content: flex-start;
+
   min-width: 100px;
   text-overflow: ellipsis;
 
   z-index: 1;
   background: var(bg);
 
-  display: inline-block;
+  border: none;
   border-top-right-radius: 4px;
   border-top: 1px solid var(tab-border-color);
 
@@ -426,16 +458,17 @@ body
   border: var(tab-border);
   */
 
-  padding: 6px 8px 0px 8px;
+  border-bottom: 1px solid var(tab-border-color);
 
-  /*
-  margin-left: -8px;
-  box-shadow: inset 7px 10px 9px -10px black;
-  */
+  border-top-right-radius: 4px;
+  padding: 0px;
+
+  box-shadow: inset -8px 9px 20px -15px black;
 
   margin-left: -2px;
   background: transparent;
 }
+
 
 #multi .tabsets .tabset .list li:before,
 #multi .tabsets .tabset .list li:after
@@ -460,14 +493,14 @@ body
 #multi .tabsets .tabset .list li:before {
   left: 1px;
   bottom: -1px;
-  height: 15px;
+  height: 20px;
   border-bottom-left-radius: 5px;
   border-width: 0 0 1px 1px;
 }
 #multi .tabsets .tabset .list li:after {
   right: 0px;
   top: -1px;
-  height: 15px;
+  height: 20px;
   border-top-right-radius: 5px;
   border-width: 1px 1px 0 0;
 }
@@ -476,7 +509,7 @@ body
 {
   right: 1px;
   top: 2px;
-  height: 27px;
+  height: 22px;
 
   border-top-right-radius: 0px;
   border-bottom-right-radius: 5px;
@@ -485,7 +518,7 @@ body
 
 #multi .tabsets .tabset .list li:last-child:after
 {
-  height: 29px;
+  height: 22px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 5px;
   border-width: 0px 1px 1px 0;
@@ -513,21 +546,23 @@ body.inactive  #multi .tabsets .tabset .list li,
   z-index: 2;
   flex: 1.2 1 auto;
 
+  border-top: none;
 
-  border: none;
-  border-radius: 0px;
-  /*
-  box-shadow: 1px -1px 12px -3px black;
-  */
+
+  box-shadow: 0 -8px 50px -10px black;
+  box-shadow: none;
+}
+
+#multi .tabsets .tabset .list li span {
+  flex: auto;
 }
 
 #multi .tabsets .tabset .list li .tab-close {
-  float: left;
-  margin: 3px 0px;
+  flex: 0 0 12px;
   width: 12px;
   height: 12px;
   display: hidden;
-  padding: 0;
+  margin: 0 8px;
 
   color: transparent;
 }
