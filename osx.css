@@ -958,10 +958,7 @@ a:hover,
 }
 
 #browser nav {
-  display: -webkit-flex;
   display: flex;
-
-  -webkit-flex-direction: row;
   flex-direction: row;
 
   padding: 1px 4px;
@@ -1063,15 +1060,12 @@ a:hover,
 .search-results .searcher
 {
   border-top: 1px solid var(border);
-  display: -webkit-flex;
   display: flex;
 
-  -webkit-flex-direction: column;
   flex-direction: column;
 }
 
 .search-results .searcher > * {
-  display: -webkit-flex;
   display: flex;
 }
 
@@ -1172,8 +1166,8 @@ OSX like search behavior
 .plugin-manager .tabs
 {
   display: flex;
-  -webkit-flex-direction:row;
-  -webkit-align-items:stretch;
+  flex-direction:row;
+  align-items:stretch;
   width:100%;
 
   border-bottom: var(scope-bar-border);
@@ -1205,7 +1199,7 @@ OSX like search behavior
 
 .plugin-manager input
 {
-  -webkit-flex:1;
+  flex:1;
 }
 
 button.scope-button:not(.active),
