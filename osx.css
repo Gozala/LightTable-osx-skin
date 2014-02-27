@@ -18,7 +18,6 @@ Notes:
 }
 
 input {
-  border: inital;
   outline: initial;
   border-radius: initial;
 }
@@ -128,6 +127,8 @@ input {
   var-secondary-accent-fg: #03FFc0;
   var-secondary-accent-dim-fg: #5EBDA5;
   var-secondary-accent-desat-fg: #9BC2B8;
+
+  var-tab-border-color: rgb(97, 97, 97)
 }
 
 :root .skin-osx.inactive {
@@ -360,9 +361,7 @@ body
 
 #multi .list:hover
 {
-  overflow-x:inital;
-  height:initial;
-  z-index:initial;
+
 }
 
 /* tab with modified content */
@@ -385,7 +384,10 @@ body
 #multi .tabset .list {
   margin: 0;
   padding: 0 12px 0 0;
+  padding: 0;
+  /*
   box-shadow: inset 7px 10px 9px -10px black;
+  */
   overflow-x: auto;
 }
 
@@ -395,9 +397,6 @@ body
   height: auto;
   margin: 0;
   padding: 0;
-
-  display: -webkit-flex;
-  -webkit-flex-direction: row;
 
   display: flex;
   flex-direction: row;
@@ -411,7 +410,6 @@ body
   position: relative;
   text-align: center;
 
-  -webkit-flex: 1 1 auto;
   flex: 1 1 auto;
   min-width: 100px;
   text-overflow: ellipsis;
@@ -419,31 +417,156 @@ body
   z-index: 1;
   background: var(bg);
 
+  display: inline-block;
+  border-top-right-radius: 4px;
+  border-top: 1px solid var(tab-border-color);
+
+  /*
   border-radius: 0px 0px 6px 6px;
   border: var(tab-border);
+  */
 
-  border-top-width: 0px;
   padding: 6px 8px 0px 8px;
 
+  /*
   margin-left: -8px;
-
   box-shadow: inset 7px 10px 9px -10px black;
+  */
+
+  margin-left: -2px;
+  background: transparent;
 }
+
+#multi .tabsets .tabset .list li:before,
+#multi .tabsets .tabset .list li:after
+{
+  position: absolute;
+  width: 5px;
+  content: " ";
+  border: 1px solid var(tab-border-color);
+}
+
+#multi .tabsets .tabset .list li:first-child:before {
+  border: none;
+}
+
+#multi .tabsets .tabset .list li:last-child
+{
+  border-top-right-radius: 0;
+  border-right: none;
+}
+
+
+#multi .tabsets .tabset .list li:before {
+  left: 1px;
+  bottom: -1px;
+  height: 15px;
+  border-bottom-left-radius: 5px;
+  border-width: 0 0 1px 1px;
+}
+#multi .tabsets .tabset .list li:after {
+  right: 0px;
+  top: -1px;
+  height: 15px;
+  border-top-right-radius: 5px;
+  border-width: 1px 1px 0 0;
+}
+
+#multi .tabsets .tabset .list li.active:after
+{
+  right: 1px;
+  top: 2px;
+  height: 27px;
+
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 5px;
+  border-width: 0 1px 1px 0;
+}
+
+#multi .tabsets .tabset .list li:last-child:after
+{
+  height: 29px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 5px;
+  border-width: 0px 1px 1px 0;
+  border: none;
+}
+
+#multi .tabsets .tabset .list li.active+li:before {
+  border: none;
+}
+
+#multi .tabsets .tabset .list li.active+li {
+  border-top-left-radius: 4px;
+}
+
 
 body.inactive  #multi .tabsets .tabset .list li,
 #multi .tabsets .tabset .list li:window-inactive
 {
+  /*
   background: var(inactive-chrome);
+  */
 }
 
 #multi .tabsets .tabset .list li.active {
   z-index: 2;
-  -webkit-flex: 2 1 auto;
   flex: 1.2 1 auto;
 
+
+  border: none;
+  border-radius: 0px;
+  /*
   box-shadow: 1px -1px 12px -3px black;
+  */
 }
 
+#multi .tabsets .tabset .list li .tab-close {
+  float: left;
+  margin: 3px 0px;
+  width: 12px;
+  height: 12px;
+  display: hidden;
+  padding: 0;
+
+  color: transparent;
+}
+
+#multi .tabsets .tabset .list li .tab-close:hover {
+  padding: 0;
+  width: 12px;
+}
+
+#multi .tabsets .tabset .list li:hover .tab-close,
+.skin-osx.active #multi .tabsets .tabset .list li:hover .tab-close
+{
+  background: url("./images/AW ActiveTabClose.png")
+}
+
+.skin-osx.inactive #multi .tabsets .tabset .list li:hover .tab-close {
+  background: url("./images/IW ActiveTabClose.png")
+}
+
+
+#multi .tabsets .tabset .list .tab-close:hover,
+.skin-osx.active #multi .tabsets .tabset .list li .tab-close:hover
+{
+  background: url("./images/AW ActiveTabCloseRollover.png")
+}
+
+.skin-osx.inactive #multi .tabsets .tabset .list li .tab-close:hover {
+  background: url("./images/IW ActiveTabCloseRollover.png")
+}
+
+#multi .tabsets .tabset .list .tab-close:active,
+.skin-osx.active #multi .tabsets .tabset .list li .tab-close:active
+{
+  background: url("./images/AW ActiveTabClosePressed.png")
+}
+
+.skin-osx.inactive #multi .tabsets .tabset .list li .tab-close:active {
+  background: url("./images/IW ActiveTabClosePressed.png")
+}
 
 
 #bottombar .content { background:var(bg); border-top:2px solid var(border); }
@@ -937,13 +1060,12 @@ a:hover,
 * Theme specific
 ***********************************************************/
 
-.cm-visible-space { background:url("/core/img/visible-space11.png"); background-size:100%; background-position:center;  background-repeat: no-repeat;}
-.cm-visible-tab { background:url("/core/img/visible-tab7.png"); background-size:100% 1em; background-position:center;  background-repeat: no-repeat;}
+.cm-visible-space {  background:url("./images/visible-space11.png"); background-size:100%; background-position:center;  background-repeat: no-repeat;}
+.cm-visible-tab { background:url("./images/visible-tab7.png"); background-size:100% 1em; background-position:center;  background-repeat: no-repeat;}
 
-#right-bar .clients .load-wrapper .img { width:20px; height:20px; background:url("/core/img/connectingloader.gif") }
+#right-bar .clients .load-wrapper .img { width:20px; height:20px; background: no-repeat url("./images/loader.gif") }
 
-.load-wrapper .img { background:url("/core/img/loaderdark.gif"); }
-
+.load-wrapper .img { background: no-repeat url("./images/loader.gif"); }
 
 
 /**
