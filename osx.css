@@ -68,13 +68,17 @@ input {
   var-selected-entry-fg: white;
   var-selected-entry-border-color: rgb(145, 175, 196);
 
+  var-active-chrome-caption: rgb(65, 65, 65);
+  var-inactive-chrome-caption: rgb(135, 135, 135);
+
   var-bg: var(chrome);
-  var-fg: rgb(60, 60, 60);
+  var-fg: var(active-chrome-caption);
+
   var-multi: inherit;
   var-border: rgb(184, 184, 184);
   var-shadow: black;
 
-  var-fg-shadow: rgba(255, 255, 255, 0.498039) 0px 1px 0px;
+  var-fg-shadow: rgba(255, 255, 255, 0.498039) 0px 1.1px 1.5px;
 
 
 
@@ -133,6 +137,7 @@ input {
 
 :root .skin-osx.inactive {
   var-bg: var(inactive-chorme);
+  var-fg: var(inactive-chrome-caption);
 
   var-selected-entry-bg: linear-gradient(to bottom, rgb(194, 194, 194), rgb(156, 156, 156));
   var-selected-entry-border-color: rgb(168, 168, 168);
@@ -389,7 +394,7 @@ body
   /*
   box-shadow: inset 7px 10px 9px -10px black;
   */
-  overflow-x: auto;
+  overflow: hidden;
 }
 
 
@@ -408,153 +413,96 @@ body
 #multi .tabsets .tabset .list li.sortable-dragging,
 #multi .tabsets .tabset .list li.active.sortable-dragging
 {
-  background: var(bg);
-  border-radius: 3px 3px 5px 5px;
+  border: none;
+  border-image: url("./images/AW PulledTab.png") 0 5 fill repeat repeat;
+  background: var(active-chrome);
+  border-image: none;
+  border-radius: 5px 5px;
+  padding-left: 5px;
+  flex: 1;
 }
 
 #multi .tabsets .tabset .list li.sortable-placeholder
 {
-  height: 25px !important;
   display: flex;
-  flex: 0.8;
+  flex: 0.9;
+  margin-left: 13px;
+  border-left: 0px;
 }
 
-#multi .tabsets .tabset .list li.sortable-placeholder:before
+#multi .tabsets .tabset .list li:first-child.sortable-dragging + li.sortable-placeholder,
+#multi .tabsets .tabset .list li:first-child.sortable-placeholder
 {
-  border-left: 1px solid var(tab-border-color) !important;
+  margin-left: -13px;
 }
 
-#multi .tabsets .tabset .list li.sortable-dragging:before,
-#multi .tabsets .tabset .list li.sortable-dragging:after
-{
-  display: none;
-}
 
 #multi .tabsets .tabset .list li,
 #multi .tabsets .tabset .list li:hover
 {
+  font-size: 13px;
+  font-weight: bold;
   color: var(fg);
+  text-shadow: var(fg-shadow);
+
   position: relative;
-  height: 25px;
+  height: 24px;
+  float: right;
 
   flex: 1 1 auto;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  align-content: flex-start;
 
-  min-width: 100px;
   text-overflow: ellipsis;
+  min-width: 105px;
 
   z-index: 1;
-  background: var(bg);
-
   border: none;
-  border-top-right-radius: 4px;
-  border-top: 1px solid var(tab-border-color);
+  padding: 0 4px;
+  margin: 0;
 
-  /*
-  border-radius: 0px 0px 6px 6px;
-  border: var(tab-border);
-  */
 
-  border-bottom: 1px solid var(tab-border-color);
-
-  border-top-right-radius: 4px;
-  padding: 0px;
-
-  box-shadow: inset -8px 9px 20px -15px black;
-
-  margin-left: -2px;
+  border-width: 0 9px;
+  border-style: solid;
+  margin-right: -13px;
+  border-image: url("./images/AW InactiveTab.png") 0 9 fill repeat repeat;
   background: transparent;
 }
 
-
-#multi .tabsets .tabset .list li:before,
-#multi .tabsets .tabset .list li:after
-{
-  position: absolute;
-  width: 5px;
-  content: " ";
-  border: 1px solid var(tab-border-color);
+#multi .tabsets .tabset .list li:first-child:not(.active) {
+  margin-left: -5px;
 }
 
-#multi .tabsets .tabset .list li:first-child:before {
-  border: none;
-}
-
-#multi .tabsets .tabset .list li:last-child
-{
-  border-top-right-radius: 0;
-  border-right: none;
-}
-
-
-#multi .tabsets .tabset .list li:before {
-  left: 1px;
-  bottom: -1px;
-  height: 20px;
-  border-bottom-left-radius: 5px;
-  border-width: 0 0 1px 1px;
-}
-#multi .tabsets .tabset .list li:after {
-  right: 0px;
-  top: -1px;
-  height: 20px;
-  border-top-right-radius: 5px;
-  border-width: 1px 1px 0 0;
-}
-
-#multi .tabsets .tabset .list li.active:after
-{
-  right: 1px;
-  top: 2px;
-  height: 22px;
-
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 5px;
-  border-width: 0 1px 1px 0;
-}
-
-#multi .tabsets .tabset .list li:last-child:after
-{
-  height: 22px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 5px;
-  border-width: 0px 1px 1px 0;
-  border: none;
-}
-
-#multi .tabsets .tabset .list li.active+li:before {
-  border: none;
-}
-
-#multi .tabsets .tabset .list li.active+li {
-  border-top-left-radius: 4px;
-}
-
-
-body.inactive  #multi .tabsets .tabset .list li,
-#multi .tabsets .tabset .list li:window-inactive
-{
-  /*
-  background: var(inactive-chrome);
-  */
-}
 
 #multi .tabsets .tabset .list li.active {
   z-index: 2;
   flex: 1.2 1 auto;
+  border: 0 11px;
+  border-image: url("./images/AW ActiveTab.png") 0 9 fill repeat repeat;
 
-  border-top: none;
-
-
-  box-shadow: 0 -8px 50px -10px black;
-  box-shadow: none;
 }
+
+.skin-osx.inactive #multi .tabsets .tabset .list li.active
+{
+  border-image-source: url("./images/IW ActiveTab.png");
+}
+
+.skin-osx.inactive #multi .tabsets .tabset .list li
+{
+  border-image-source: url("./images/IW InactiveTab.png");
+}
+
+
 
 #multi .tabsets .tabset .list li span {
   flex: auto;
+}
+
+#multi .tabsets .tabset .list li .file-name
+{
+  margin-right: 30px;
+
 }
 
 #multi .tabsets .tabset .list li .tab-close {
@@ -562,9 +510,10 @@ body.inactive  #multi .tabsets .tabset .list li,
   width: 12px;
   height: 12px;
   display: hidden;
-  margin: 0 8px;
+  margin: 0 5px 0 0;
 
   color: transparent;
+  text-shadow: none;
 }
 
 #multi .tabsets .tabset .list li .tab-close:hover {
@@ -654,6 +603,7 @@ body.inactive  #multi .tabsets .tabset .list li,
 
 #side {
   box-shadow: -1px 1px 5px 0;
+  margin-top: 5px;
 }
 
 #side .content,
