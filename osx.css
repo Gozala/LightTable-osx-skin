@@ -481,7 +481,7 @@ body
 #multi .tabsets .tabset .list li.active {
   z-index: 2;
   flex: 1.2 1 auto;
-  border: 0 11px;
+  border: 0 11px solid;
   border-image: url("./images/AW ActiveTab.png") 0 9 fill repeat repeat;
 
 }
@@ -512,7 +512,6 @@ body
   flex: 0 0 12px;
   width: 12px;
   height: 12px;
-  display: hidden;
   margin: 0 5px 0 0;
 
   color: transparent;
