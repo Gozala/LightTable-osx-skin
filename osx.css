@@ -69,7 +69,7 @@ input {
   var-selected-entry-border-color: rgb(145, 175, 196);
 
   var-active-chrome-caption: rgb(65, 65, 65);
-  var-inactive-chrome-caption: rgb(135, 135, 135);
+  var-inactive-chrome-caption: rgb(130, 130, 130);
 
   var-bg: var(chrome);
   var-fg: var(active-chrome-caption);
@@ -78,7 +78,7 @@ input {
   var-border: rgb(184, 184, 184);
   var-shadow: black;
 
-  var-fg-shadow: rgba(255, 255, 255, 0.498039) 0px 1.1px 1.5px;
+  var-fg-shadow: rgba(255, 255, 255, 0.498039) 0.8px 1.5px 1.5px;
 
 
 
@@ -443,8 +443,8 @@ body
 #multi .tabsets .tabset .list li,
 #multi .tabsets .tabset .list li:hover
 {
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 12px;
+  font-weight: 600;
   color: var(fg);
   text-shadow: var(fg-shadow);
 
