@@ -281,6 +281,7 @@ body
   background-attachment: fixed;
   color: var(fg);
   font-family: Lucida Grande, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection
@@ -1215,8 +1216,6 @@ button.scope-button,
   font-style: normal;
   font-weight: normal;
   line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   font-size: 18px;
   margin: 5px;
 
