@@ -374,9 +374,12 @@ body
   color: inherit;
 }
 
+/*
 #multi .list .dirty:before {
   content: "● ";
 }
+*/
+
 
 #multi .list.dragging li {
   background: transparent !important;
@@ -520,6 +523,22 @@ body
   padding: 0;
   width: 12px;
 }
+
+#multi .tabsets .tabset .list li.dirty .tab-close
+{
+  background: url("./images/AW InactiveTabEdited.png");
+}
+
+.skin-osx.inactive #multi .tabsets .tabset .list li.dirty .tab-close
+{
+  background: url("./images/IW InactiveTabEdited.png?5");
+}
+
+#multi .tabsets .tabset .list li.active.dirty .tab-close
+{
+  background: url("./images/AW ActiveTabEdited.png");
+}
+
 
 #multi .tabsets .tabset .list li:hover .tab-close,
 .skin-osx.active #multi .tabsets .tabset .list li:hover .tab-close
