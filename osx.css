@@ -36,7 +36,10 @@ input
                                                   rgb(198, 198, 198));
   var-chrome: var(active-chrome);
   var-secondary-chrome: linear-gradient(to bottom, rgb(237, 237, 237),
-                                                   rgb(216, 216, 216));
+                                                   rgb(217, 217, 217));
+
+  var-chrome-border-color: rgb(105, 105, 105);
+
   /* OSX scope buttons:
   https://developer.apple.com/library/mac/documentation/UserExperience/Conceptual/AppleHIGuidelines/Controls/Controls.html#//apple_ref/doc/uid/TP30000359-SW13
   TODO: Make plugin manager just use .scope-button class.
@@ -121,6 +124,8 @@ input
   var-selected-entry-bg: linear-gradient(to bottom, rgb(194, 194, 194),
                                                     rgb(156, 156, 156));
   var-selected-entry-border-color: rgb(168, 168, 168);
+
+  chrome-border-color: rgb(166, 166, 166);
 }
 
 @font-face
@@ -967,6 +972,7 @@ body
 {
   border-width: 0 0 0 1px;
   padding: 0;
+  margin-top: 1px;
   border-top: none;
   background: transparent;
   box-shadow: none;
