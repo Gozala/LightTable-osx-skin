@@ -651,16 +651,28 @@ body
   margin-left: -5px;
 }
 
-#multi .tabsets .tabset .list li:first-child.active
+#multi .tabsets .tabset + .tabset .list li:first-child.active
 {
   margin-left: -4px;
 }
+
 
 #multi .tabsets .tabset .list li:last-child
 {
   margin-right: -5px;
 
 }
+
+#multi .tabsets .tabset .list li:last-child.active
+{
+  margin-right: -3px;
+
+}
+
+#multi .tabsets .tabset:last-child .list li:last-child.active {
+  margin-right: 0px;
+}
+
 
 #multi .tabsets .tabset .list li.active
 {
