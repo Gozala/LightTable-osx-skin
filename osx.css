@@ -125,7 +125,7 @@ input
                                                     rgb(156, 156, 156));
   var-selected-entry-border-color: rgb(168, 168, 168);
 
-  chrome-border-color: rgb(166, 166, 166);
+  var-chrome-border-color: rgb(166, 166, 166);
 }
 
 @font-face
@@ -1345,6 +1345,11 @@ a:hover,
   background-attachment: fixed;
 }
 
+#statusbar-container
+{
+  border-top: 1px solid var(chrome-border-color);
+}
+
 #statusbar
 {
   color: var(fg);
@@ -1355,6 +1360,7 @@ a:hover,
   left: 0;
   right: 0;
   height: 20px;
+  top: -1px;
   border-top: 1px solid var(chrome-border-color);
 }
 
@@ -1415,7 +1421,6 @@ a:hover,
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-top: 1px solid var(chrome-border-color);
 }
 
 #find-bar input
