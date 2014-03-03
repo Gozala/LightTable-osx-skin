@@ -750,41 +750,81 @@ body
 
 #bottombar .content
 {
-  background: var(bg);
-  border-top: 2px solid var(border);
+  border-top: 1px solid var(chrome-border-color);
+  padding: 0;
+  margin: 0;
 }
 
-.console > li, .console td
+.console
 {
-  color: var(light-accent-foreground);
+  background: white;
+  color: black;
+  text-shadow: none;
+  padding: 0;
 }
 
-.console > li + li
+.console > li,
+.console-message-text
 {
-  border-top: 1px solid var(border);
+
+  text-shadow: none;
+  font-size: 12px;
+  line-height: 20px;
+  white-space: pre-wrap;
+  font-family: Menlo, monospace;
+  font-size: 11px;
+  border-top: 1px solid rgb(240, 240, 240);
+  display: flex;
 }
 
-.console > li.error + li
+.console li::before {
+  content: " ";
+  display: flex;
+  width: 15px;
+  background: no-repeat 0px 2px;
+}
+
+.console > li .url
 {
-  border-color: var(error-border);
+  text-decoration: underline;
 }
 
-.console li.error
-{
-  color: var(error-fg);
-  background: var(error-bg);
-  border-color: var(error-border);
-}
-
+.console-error-level .console-message-text,
+.console-error-level .section .header .title,
+.console li.error,
 .console li.error table td
 {
-  color: var(error-fg);
+  color: red;
 }
 
-.console li.error tr:hover td
+.console-debug-level .console-message-text,
+.console li.debug
 {
-  color: var(error-highlight-fg);
+    color: blue;
 }
+
+
+.console-debug-level::before,
+.console li.debug::before
+{
+    background-color: blue;
+}
+
+.console-error-level::before,
+.console li.error::before
+{
+    background-image: url(./images/Error.svg);
+    background-size: 10px 10px;
+    content: " ";
+}
+
+.console-warning-level::before,
+.console li.warning::before
+{
+    background-image: url(./images/Warning.svg);
+    background-size: 10px 10px;
+}
+
 
 .console li .file
 {
@@ -901,8 +941,7 @@ body
 
 #side
 {
-  box-shadow: -1px 1px 5px 0;
-  margin-top: 5px;
+  margin-top: 1px;
 }
 
 #side .content,
@@ -1298,6 +1337,7 @@ a:hover,
   left: 0;
   right: 0;
   height: 20px;
+  border-top: 1px solid var(chrome-border-color);
 }
 
 #statusbar .console-toggle
@@ -1357,6 +1397,7 @@ a:hover,
   display: flex;
   flex-direction: row;
   align-items: center;
+  border-top: 1px solid var(chrome-border-color);
 }
 
 #find-bar input
