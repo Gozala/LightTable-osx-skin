@@ -540,6 +540,11 @@ body
   top: 24px;
 }
 
+#multi .vertical-grip
+{
+  right: 0;
+}
+
 #multi .tabset + .tabset
 {
 }
